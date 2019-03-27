@@ -19,12 +19,14 @@
       <div class="col-sm-2">
       {% block sidebar %}
       <ul class="sidebar-nav">
+          <li><a href="{% url 'index' %}">Главная</a></li>
+          <li><a href="{% url 'posts' %}">Лента постов</a></li>
              {% if user.is_authenticated %}
           <li>User: {{ user.get_username }}</li>
-          <li><a href="{% url 'logout'%}?next={{request.path}}">Выход</a></li>
+          <li><a href="{% url 'logout' %}?next={{request.path}}">Выход</a></li>
           <li><a href="{% url 'post-new' %}">Добавить пост</a></li>
              {% else %}
-          <li><a href="{% url 'login'%}?next={{request.path}}">Логин</a></li>
+          <li><a href="{% url 'login' %}?next={{request.path}}">Логин</a></li>
              {% endif %}
       </ul>
      {% endblock %}
