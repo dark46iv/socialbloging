@@ -6,10 +6,11 @@
     {% if post_list %}
 
         {% for post in post_list %}
-            <ul>
-                <li style="list-style-type:none;"><a href="{{ post.get_absolute_url }}" class="post" data-id="{{ post.id }}"> {{ post.title }}</a></li>
-
-            </ul>
+            <div>
+            <p>published: {{ post.published_date }}</p>
+            <h1><a href="{{ post.get_absolute_url }}" class="post" data-id="{{ post.id }}"> {{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
+            </div>
         {% endfor %}
     {% endif %}
 {% endblock %}

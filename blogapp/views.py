@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import FormView
+from .forms import PostForm
+from django.utils import timezone
 
 # Create your views here.
 
@@ -24,3 +27,17 @@ class PostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
+
+
+def post_new(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post-detail', pk=post.pk)
+    else:
+        form = PostForm()
+    return render(request, 'post_edit.html', {'form': form})
