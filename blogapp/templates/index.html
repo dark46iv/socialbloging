@@ -4,10 +4,4 @@
 {% block content %}
 <h1>TEST</h1>
 
-        {% for post in posts %}
-            <ul>
-                <li style="list-style-type:none;"><a href="{{ post.get_absolute_url }}" class="post" data-id="{{ post.id }}"> {{ post.title }}</a></li>
-
-            </ul>
-        {% endfor %}
 {% endblock %}
