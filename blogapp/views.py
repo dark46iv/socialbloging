@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Post
+from .models import Post, Profile
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
@@ -24,12 +24,29 @@ class PostListView(ListView):
         context['posts'] = self.model.objects.all()
         return context
 
+    def add_to_refer(self, author):
+        Profile.preferred.add(author)
+
 
 class PostDetailView(DetailView):
+
     model = Post
 
 
+class AuthorListView(ListView):
+
+    model = Profile
+    paginate_by = 10
+
+    def get_context_data(self, *args, object_list=None, **kwargs):
+        context = super(AuthorListView, self).get_context_data(*args, **kwargs)
+        context['authors'] = self.model.objects.all()
+        print(context['authors'].values()[0])
+        return context
+
+
 def post_new(request):
+
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():

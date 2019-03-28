@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Authors List</h1>
+
+
+
+        {% for user in authors %}
+            <div>
+            <h1><a href="{{ user.add_to_refer }}" class="author" data-id="{{ user.id }}"> {{ user }}</a></h1>
+            </div>
+        {% endfor %}
+
+{% endblock %}

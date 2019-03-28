@@ -7,9 +7,10 @@
 
         {% for post in post_list %}
             <div>
-            <p>published: {{ post.published_date }}</p>
             <h1><a href="{{ post.get_absolute_url }}" class="post" data-id="{{ post.id }}"> {{ post.title }}</a></h1>
             <p>{{ post.text|linebreaksbr }}</p>
+            <p>published: {{ post.published_date }}</p>
+            <p>Author: {{ post.author }}</p>
             </div>
         {% endfor %}
     {% endif %}
